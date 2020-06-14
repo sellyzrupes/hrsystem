@@ -5,7 +5,6 @@ dir_name = os.path.dirname(__file__)
 file_name = os.path.join(dir_name, '../Database/employee.json')
 
 def load_employee_data():
-    print("gol bos")
     try:
         with open(file_name, "r") as f:
             return json.load(f)

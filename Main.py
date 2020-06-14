@@ -19,50 +19,89 @@ from Models import employee as e
 
 def main():
     #TODO: write the function to run the different options. Handle the case for various user_roles.
-    login_menu()
-    option = get_option_input()
-    while True:
-        if option == 1:
-            user = raw_input("Input username/email: ")
-            passwd = raw_input("Input password: ")
-            userdata = login(user,passwd)
-            menu()
-        elif option == 0:
-            print("The program will quit now.")
-            return False
+    login_option = True
+    while login_option == True:
+        login_menu()
+        login_option = get_option_input()
+        user = raw_input("Input username/email: ")
+        passwd = raw_input("Input password: ")
+        userdata = login(user,passwd)
+        if bool(userdata) == True:
+            menu_option = True
+            while menu_option == True:
+                menu(userdata)
+                menu_option = get_option_input()
+                if(menu_option == 0):
+                    logout()
+                    print("Logout success!")
+        else:
+            print("Wrong input, please try again")
+    print("The program will quit now.")
+    #while login_option:
+    #    if option == 1:
+    #        user = raw_input("Input username/email: ")
+    #        passwd = raw_input("Input password: ")
+    #        userdata = login(user,passwd)
+    #        menu()
+    #    elif option == 0:
+    #        print("The program will quit now.")
+    #        return False
 
 def login_menu():
     print("\n-----------------------------------------------------------")
-    print("Please Login.\nPress 1 to proceed.\nPress 0 to exit.")
+    print("Welcome to HR System!\nPress 1 to Login.\nPress 0 to exit.")
     print("-----------------------------------------------------------\n")
 
 
-def menu():
-    #TODO: Add more options here
-    print("\n-----------------------------------------------------------")
-    print("Please kindly choose which option by typing the number.")
-    print("1. Show all team members")
-    print("2. Exit")
-    print("-----------------------------------------------------------\n")
+def menu(userdata):
+    if userdata['role_id'] == 1:
+        #1 = employee
+        print("\n-----------------------------------------------------------")
+        print("Please kindly choose which option by typing the number.")
+        print("1. View My data")
+        print("2. Apply Leave")
+        print("0. Exit")
+        print("-----------------------------------------------------------\n")
+    elif userdata['role_id'] == 2:
+        #2 = manager
+        print("\n-----------------------------------------------------------")
+        print("Please kindly choose which option by typing the number.")
+        print("1. View My Team")
+        print("2. Apply Leave")
+        print("3. Approve Leave")
+        print("0. Exit")
+        print("-----------------------------------------------------------\n")
+    elif userdata['role_id'] == 3:
+        #3 = admin
+        print("\n-----------------------------------------------------------")
+        print("Please kindly choose which option by typing the number.")
+        print("1. View All Employee")
+        print("2. Apply Leave")
+        print("3. Approve Leave")
+        print("4. Add Employee")
+        print("0. Exit")
+        print("-----------------------------------------------------------\n")
 
 def get_option_input():
-    option = raw_input("Input option: ")
-    return int(option)
+    opt = raw_input("Input option: ")
+    return int(opt)
 
 def login(user,passwd):
     dataemp = el.load_employee_data()
     #print(dataemp['employees'])
-    ctr = 0
     for val in dataemp['employees']:
         if val['email'] == user:
             if str(val['password']) == passwd:
                 print("Login Success!")
-                ctr +=1
-                return val    
-    if ctr == 0:
-        print("Wrong input, please try again")
+                return val
+            else:
+                return False   
     #yuhu = e.Employee(coba['employees']['emp_id'],coba['employees']['name'],coba['employees']['email'],coba['employees']['password'],coba['employees']['role_id'],coba['employees']['team_id'],coba['employees']['status_id'],coba['employees']['leave'])
     #Employee()
+
+def logout():
+    ctr = 0
+    return ctr
 
 if __name__ == "__main__":
     main()
