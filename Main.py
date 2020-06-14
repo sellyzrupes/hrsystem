@@ -16,6 +16,7 @@
 import config_variables as cv
 from Load_Data import employee as el
 from Models import employee as e
+from HR_System import view_employee as ve
 
 def main():
     #TODO: write the function to run the different options. Handle the case for various user_roles.
@@ -34,6 +35,8 @@ def main():
                 if(menu_option == 0):
                     logout()
                     print("Logout success!")
+                elif (menu_option == 1):
+                    ve.view_emp(userdata)
         else:
             print("Wrong input, please try again")
     print("The program will quit now.")
