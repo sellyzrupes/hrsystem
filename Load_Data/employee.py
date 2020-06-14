@@ -12,4 +12,3 @@ def load_employee_data():
         print("There is no data in the json file.")
     except IOError:
         print("The file do not exist or has a syntax error.")
-

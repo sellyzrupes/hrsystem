@@ -29,7 +29,7 @@ def main():
         userdata = login(user,passwd)
         if bool(userdata) == True:
             menu_option = True
-            while menu_option == True:
+            while menu_option > 0:
                 menu(userdata)
                 menu_option = get_option_input()
                 if(menu_option == 0):
@@ -37,6 +37,13 @@ def main():
                     print("Logout success!")
                 elif (menu_option == 1):
                     ve.view_emp(userdata)
+                elif (menu_option == 4):
+                    inputname = raw_input("Insert name: ")
+                    inputemail = raw_input("Insert email: ")
+                    inputpass = raw_input("Insert password: ")
+                    inputrole = raw_input("Insert role id: ")
+                    inputteam = raw_input("Insert team id: ")
+                    ve.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
         else:
             print("Wrong input, please try again")
     print("The program will quit now.")
