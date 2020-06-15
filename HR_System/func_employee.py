@@ -49,8 +49,8 @@ def add_emp(inputname, inputemail, inputpass, inputrole,inputteam):
         "leave": 14
     } 
     dataemp['employees'].append(newdata)
-    with open('Database/employee.json','w') as emp2:
-        json.dump(dataemp, emp2, indent=2)
+    with open('Database/employee.json','w') as emp_file:
+        json.dump(dataemp, emp_file, indent=4)
     print("Added Successfully!")
 
 def check_employee_status(status):

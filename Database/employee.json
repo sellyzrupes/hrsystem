@@ -22,7 +22,7 @@
         },
         {
             "emp_id": 1002,
-            "name": "susan",
+            "name": "Susan Sue",
             "email": "susan@shopi.com",
             "password": "123123",
             "role_id": 2,
@@ -32,8 +32,8 @@
         },
         {
             "emp_id": 1003,
-            "name": "karen",
-            "email": "karen@shopi.com",
+            "name": "Chilli Sauce",
+            "email": "chilli@shopi.com",
             "password": "123123",
             "role_id": 1,
             "team_id": 1,
@@ -42,7 +42,7 @@
         },
         {
             "emp_id": 1004,
-            "name": "karen",
+            "name": "Karen Kay",
             "email": "karen@shopi.com",
             "password": "123123",
             "role_id": 1,

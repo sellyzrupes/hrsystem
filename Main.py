@@ -47,7 +47,15 @@ def main():
                     elif (menu_option == 2):
                         start_date = raw_input("Insert start date(format dd-mm-yyyy): ")
                         end_date = raw_input("Insert end date(format dd-mm-yyyy): ")
-                        fl.apply_leave(start_date,end_date,userdata['emp_id'])
+                        fl.apply_leave(start_date,end_date,userdata)
+                    #3 = Approve Leave
+                    elif (menu_option == 3):
+                        fl.view_pending_leave(userdata)
+                        inputapprove  = raw_input("Choose employee ID: ")
+                        print("1. Approve\n2. Reject\n0.Cancel")
+                        inputstatus = get_option_input()
+                        if(inputstatus > 0):
+                            fl.approve_leave(inputapprove, inputstatus)
                     #Add Employee
                     elif (menu_option == 4):
                         inputname = raw_input("Insert name: ")

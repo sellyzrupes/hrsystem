@@ -1,7 +1,7 @@
 {
     "leaves": [
         {
-            "leave_status": 0, 
+            "leave_status": 1, 
             "leave_end": 1592928000, 
             "leave_balance": 4, 
             "leave_id": 1, 
@@ -9,13 +9,26 @@
             "leave_start": 1592582400
         }, 
         {
-            "leave_status": 0, 
-            "leave_end": "1592668800", 
+            "leave_status": 2, 
+            "leave_end": 1592668800, 
             "leave_balance": 1, 
             "leave_id": 2, 
-            "emp_id": 1001, 
-            "leave_start": "1592582400"
+            "emp_id": 1003, 
+            "leave_start": 1592582400
         }
     ], 
-    "holidays": []
+    "peak_periods": [
+        1594118473, 
+        1596883273, 
+        1599648073, 
+        1602326473, 
+        1605091273, 
+        1607769673
+    ], 
+    "holidays": [
+        1596192073, 
+        1597056073, 
+        1605523273, 
+        1608892873
+    ]
 }
