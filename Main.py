@@ -112,6 +112,7 @@ def get_option_input():
 
 def login(user,passwd):
     dataemp = el.load_employee_data()
+    #data = e.Employee(dataemp['emp_id'],)
     for val in dataemp['employees']:
         if val['email'] == user:
             if str(val['password']) == passwd:

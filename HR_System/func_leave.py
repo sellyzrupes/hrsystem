@@ -10,9 +10,7 @@ dataleave = ll.load_leave_data()
 def check_peak_period(sd,ed):
     counter = False
     for val in dataleave['peak_periods']:
-        if sd <= val and ed >= val:
-            counter = True
-        if (math.fabs(sd-val) <= 86400) or (math.fabs(ed-val) <= 86400):
+        if (sd <= val) and (ed >= val):
             counter = True
     return counter
 
@@ -24,27 +22,27 @@ def check_other_member_leave(sd,ed,userdata):
             if emp['team_id'] == userdata['team_id']:
                 save_emp.append(emp['emp_id'])
                 total_member += 1
-    print(total_member)
+    #print(total_member)
     #to check emp id on leave data
     save_id = []
     for teamleave in dataleave['leaves']:
         for test in save_emp:
             if (test == teamleave['emp_id']) and (teamleave['leave_status'] == 1):
                 save_id.append(teamleave['leave_id'])
-    print(save_id)
+    #print(save_id)
     counter = 0
     #check if leave between already taken leave
     for teamleave in dataleave['leaves']:
         for member in save_id:
             if (member == teamleave['leave_id']):
-                print("masuk")
+                #print("masuk")
                 if (teamleave['leave_start']<= sd and teamleave['leave_end'] >= sd):
                     counter +=1
                 if (teamleave['leave_start']<= ed and teamleave['leave_end'] >= ed):
                     counter +=1
                 if (math.fabs(sd-teamleave['leave_start']) <= 86400) or (math.fabs(ed-teamleave['leave_end']) <= 86400):
                     counter +=1
-    print(counter)
+    #print(counter)
     #check final result
     if(counter < (total_member-1)*2):
         return False
@@ -60,26 +58,71 @@ def check_other_member_leave(sd,ed,userdata):
 #    leave_id = int(dataleave['leaves'][l]['leave_id'])+1
 #    selisih = int(math.floor((int(etime) - int(stime))/86400))
 
-#def baru(sd,ed):
-#    selisih = int(math.floor((int(etime) - int(stime))/86400))
+def validation_check_leave(sd,ed):
+    days_of_leave = int(math.ceil((ed - sd)/86400))
+    #print(days_of_leave)
+    counter = 0
+    for val in dataleave['holidays']:
+        if sd <= val and ed >= val:
+            counter +=1
+        if (math.fabs(sd-val) <= 86400) or (math.fabs(ed-val) <= 86400):
+            counter +=1
+    #print("holiday counter: " + str(counter))
+    #sdate =
+    #edate
+    datecount = sd 
+    for i in range(days_of_leave):
+        #print i
+        if (int(datetime.datetime.fromtimestamp(datecount).weekday()) == 5 or int(datetime.datetime.fromtimestamp(datecount).weekday()) == 6):
+            counter +=1
+            #print(counter)
+        datecount += 86400
+    finalresult = days_of_leave - counter + 1
+    return finalresult
+
     #checkisholiday
 #    counter = 0
 #    for asd in selisih:
 #        if check holiday
 #        elif weekend po bukan
 
+#def write_leave()
+#
 def apply_leave(sd,ed,userdata):
+    emp_id = userdata['emp_id']
+    l = len(dataleave['leaves'])-1
+    lastid = int(dataleave['leaves'][l]['leave_id'])+1
     starttime = date_to_epoch(sd)
     endtime = date_to_epoch(ed)
     pperiod = check_peak_period(starttime,endtime)
+    #check peak period
     if pperiod == True:
         print("Cannot take leave during peak period!")
         return None
-    pcheck = check_other_member_leave(starttime,endtime,userdata)
-    if pcheck == True:
-        print("Cannot take leave, overlapped with other members!")
-        return None
-    print(pcheck)
+    #if not manager, need to check overlapped members
+    if(userdata['role_id']!=2):
+        pcheck = check_other_member_leave(starttime,endtime,userdata)
+        if pcheck == True:
+            print("Cannot take leave, overlapped with other members!")
+            return None
+    balance = validation_check_leave(starttime,endtime)
+    inputleave = {
+        "leave_id": lastid,
+        "emp_id": emp_id, 
+        "leave_status": 0,
+        "leave_start": starttime,
+        "leave_end": endtime,
+        "leave_balance": balance
+    }
+    dataleave['leaves'].append(inputleave)
+    with open('Database/leave.json','w') as emp2:
+        json.dump(dataleave, emp2, indent=4)
+    #check holiday and workday
+
+    
+
+    
+    #print(pcheck)
     days_of_leave = int(math.floor((int(endtime) - int(starttime))/86400))
 
     
@@ -135,7 +178,6 @@ def date_to_epoch(date):
 def print_leave(teamleave,userdata):
     print("\n-----------------------------------------------------------")
     print("Employee ID : " + str(teamleave['emp_id']))
-    print("Name : " + userdata['name'])
     startdate = epoch_to_date(teamleave['leave_start'])
     print("Start : " + startdate)
     enddate = epoch_to_date(teamleave['leave_end'])
