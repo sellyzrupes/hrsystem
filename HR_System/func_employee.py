@@ -51,6 +51,7 @@ def add_emp(inputname, inputemail, inputpass, inputrole,inputteam):
     dataemp['employees'].append(newdata)
     with open('Database/employee.json','w') as emp2:
         json.dump(dataemp, emp2, indent=2)
+    print("Added Successfully!")
 
 def check_employee_status(status):
     if status == 0:

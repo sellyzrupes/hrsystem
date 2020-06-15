@@ -18,6 +18,8 @@ from Load_Data import employee as el
 from Models import employee as e
 from HR_System import func_employee as fe
 from HR_System import func_leave as fl
+from HR_System import func_team as ft
+from HR_System import func_role as fr
 
 def main():
     #TODO: write the function to run the different options. Handle the case for various user_roles.
@@ -51,9 +53,11 @@ def main():
                         inputname = raw_input("Insert name: ")
                         inputemail = raw_input("Insert email: ")
                         inputpass = raw_input("Insert password: ")
-                        inputrole = raw_input("Role options:\n1. Employee\n2. Manager\n3. Administrator\nInsert role id: ")
-                        inputteam = raw_input("Team options:\n1. Discover Landing\n2. Growth\n3. User/Account\n4. Promotion\n5. Payment\n6. Order\n7. DEEP\n8. Fraud\n9. Logistic\nInsert team id: ")
-                        ve.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
+                        fr.print_all_role_name()
+                        inputrole = raw_input("Insert role id: ")
+                        ft.print_all_team_name()
+                        inputteam = raw_input("Insert team id: ")
+                        fe.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
             else:
                 print("Wrong input, please try again")
     print("The program will quit now.")
