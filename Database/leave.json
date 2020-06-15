@@ -1,1 +1,15 @@
-
+{
+    "leaves":[
+        {
+            "leave_id": 1,
+            "emp_id": 1001, 
+            "leave_status": 0,
+            "leave_start": 1592582400,
+            "leave_end": 1592928000,
+            "leave_balance": 4
+        }
+    ],
+    "holidays":[
+        
+    ]
+}

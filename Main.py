@@ -34,28 +34,18 @@ def main():
                 menu_option = get_option_input()
                 if(menu_option == 0):
                     logout()
-                    print("Logout success!")
                 elif (menu_option == 1):
                     ve.view_emp(userdata)
                 elif (menu_option == 4):
                     inputname = raw_input("Insert name: ")
                     inputemail = raw_input("Insert email: ")
                     inputpass = raw_input("Insert password: ")
-                    inputrole = raw_input("Insert role id: ")
-                    inputteam = raw_input("Insert team id: ")
+                    inputrole = raw_input("Role options:\n1. Employee\n2. Manager\n3. Administrator\nInsert role id: ")
+                    inputteam = raw_input("Team options:\n1. Discover Landing\n2. Growth\n3. User/Account\n4. Promotion\n5. Payment\n6. Order\n7. DEEP\n8. Fraud\n9. Logistic\nInsert team id: ")
                     ve.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
         else:
             print("Wrong input, please try again")
     print("The program will quit now.")
-    #while login_option:
-    #    if option == 1:
-    #        user = raw_input("Input username/email: ")
-    #        passwd = raw_input("Input password: ")
-    #        userdata = login(user,passwd)
-    #        menu()
-    #    elif option == 0:
-    #        print("The program will quit now.")
-    #        return False
 
 def login_menu():
     print("\n-----------------------------------------------------------")
@@ -98,20 +88,16 @@ def get_option_input():
 
 def login(user,passwd):
     dataemp = el.load_employee_data()
-    #print(dataemp['employees'])
     for val in dataemp['employees']:
         if val['email'] == user:
             if str(val['password']) == passwd:
                 print("Login Success!")
                 return val
             else:
-                return False   
-    #yuhu = e.Employee(coba['employees']['emp_id'],coba['employees']['name'],coba['employees']['email'],coba['employees']['password'],coba['employees']['role_id'],coba['employees']['team_id'],coba['employees']['status_id'],coba['employees']['leave'])
-    #Employee()
+                return False
 
 def logout():
-    ctr = 0
-    return ctr
+    print("Logout success!")
 
 if __name__ == "__main__":
     main()
