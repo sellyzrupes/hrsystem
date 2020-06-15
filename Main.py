@@ -16,74 +16,82 @@
 import config_variables as cv
 from Load_Data import employee as el
 from Models import employee as e
-from HR_System import view_employee as ve
+from HR_System import func_employee as fe
 from HR_System import func_leave as fl
+
 def main():
     #TODO: write the function to run the different options. Handle the case for various user_roles.
     login_option = True
     while login_option == True:
         login_menu()
         login_option = get_option_input()
-        user = raw_input("Input username/email: ")
-        passwd = raw_input("Input password: ")
-        userdata = login(user,passwd)
-        if bool(userdata) == True:
-            menu_option = True
-            while menu_option > 0:
-                menu(userdata)
-                menu_option = get_option_input()
-                if(menu_option == 0):
-                    logout()
-                elif (menu_option == 1):
-                    ve.view_emp(userdata)
-                elif (menu_option == 2):
-                    sdate = raw_input("Insert start date(format dd-mm-yyyy): ")
-                    edate = raw_input("Insert end date(format dd-mm-yyyy): ")
-                    fl.apply_leave(sdate,edate,userdata['emp_id'])
-                elif (menu_option == 4):
-                    inputname = raw_input("Insert name: ")
-                    inputemail = raw_input("Insert email: ")
-                    inputpass = raw_input("Insert password: ")
-                    inputrole = raw_input("Role options:\n1. Employee\n2. Manager\n3. Administrator\nInsert role id: ")
-                    inputteam = raw_input("Team options:\n1. Discover Landing\n2. Growth\n3. User/Account\n4. Promotion\n5. Payment\n6. Order\n7. DEEP\n8. Fraud\n9. Logistic\nInsert team id: ")
-                    ve.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
-        else:
-            print("Wrong input, please try again")
+        # Main Menu: 1 = Login, 0 = Exit
+        if (login_option == 1):
+            user = raw_input("Input username/email: ")
+            passwd = raw_input("Input password: ")
+            userdata = login(user,passwd)
+            if bool(userdata) == True:
+                menu_option = True
+                while menu_option > 0:
+                    menu(userdata)
+                    menu_option = get_option_input()
+                    #0 = Logout
+                    if(menu_option == 0):
+                        logout()
+                    # 1= View Employee
+                    elif (menu_option == 1):
+                        fe.view_emp(userdata)
+                    #2 = Apply Leave
+                    elif (menu_option == 2):
+                        start_date = raw_input("Insert start date(format dd-mm-yyyy): ")
+                        end_date = raw_input("Insert end date(format dd-mm-yyyy): ")
+                        fl.apply_leave(start_date,end_date,userdata['emp_id'])
+                    #Add Employee
+                    elif (menu_option == 4):
+                        inputname = raw_input("Insert name: ")
+                        inputemail = raw_input("Insert email: ")
+                        inputpass = raw_input("Insert password: ")
+                        inputrole = raw_input("Role options:\n1. Employee\n2. Manager\n3. Administrator\nInsert role id: ")
+                        inputteam = raw_input("Team options:\n1. Discover Landing\n2. Growth\n3. User/Account\n4. Promotion\n5. Payment\n6. Order\n7. DEEP\n8. Fraud\n9. Logistic\nInsert team id: ")
+                        ve.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
+            else:
+                print("Wrong input, please try again")
     print("The program will quit now.")
 
 def login_menu():
     print("\n-----------------------------------------------------------")
-    print("Welcome to HR System!\nPress 1 to Login.\nPress 0 to exit.")
+    print("Welcome to HR System!\nPress 1 to Login.\nPress 0 to Exit.")
     print("-----------------------------------------------------------\n")
 
 
 def menu(userdata):
+    print("\nWelcome " + userdata['name'] + "!")
     if userdata['role_id'] == 1:
         #1 = employee
-        print("\n-----------------------------------------------------------")
+        print("-----------------------------------------------------------")
         print("Please kindly choose which option by typing the number.")
         print("1. View My data")
         print("2. Apply Leave")
-        print("0. Exit")
+        print("0. Logout")
         print("-----------------------------------------------------------\n")
     elif userdata['role_id'] == 2:
         #2 = manager
-        print("\n-----------------------------------------------------------")
+        print("-----------------------------------------------------------")
         print("Please kindly choose which option by typing the number.")
         print("1. View My Team")
         print("2. Apply Leave")
         print("3. Approve Leave")
-        print("0. Exit")
+        print("0. Logout")
         print("-----------------------------------------------------------\n")
     elif userdata['role_id'] == 3:
         #3 = admin
-        print("\n-----------------------------------------------------------")
+        print("-----------------------------------------------------------")
         print("Please kindly choose which option by typing the number.")
         print("1. View All Employee")
         print("2. Apply Leave")
         print("3. Approve Leave")
         print("4. Add Employee")
-        print("0. Exit")
+        print("0. Logout")
         print("-----------------------------------------------------------\n")
 
 def get_option_input():
@@ -102,6 +110,8 @@ def login(user,passwd):
 
 def logout():
     print("Logout success!")
+
+
 
 if __name__ == "__main__":
     main()

@@ -34,5 +34,4 @@ def apply_leave(sd,ed,emp_id):
     with open('Database/leave.json','w') as emp2:
         json.dump(dataleave, emp2, indent=4)
 
-def check_leave(team_id):
-    
+#def check_leave(team_id):

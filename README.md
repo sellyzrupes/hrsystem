@@ -7,14 +7,14 @@ This is my Python assignment to build a mini HR system.
 Only cover basic requirements, which are:
 1. Login/Logout
     - Check if user exist or not
-    - Email format validation (not yet added)
-    - Check for wrong password (not yet added)
+    - If wrong email/password, will go back to main menu
 2. Add Employee
     - Email format validation (not yet added)
     - Before admin input team_id and role_id, system will print out all available team_id and role_id (not yet added)
     - Check if team_id not exist (not yet added)
     - Check if role_id not exist (not yet added)
 3. View Employee
+    - Data already formatted properly
     - Based on role, validation already added from menu that available to display for spesific roles
         - Staff : can only view self data
         - Manager : can view team data including self data
