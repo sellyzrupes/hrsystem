@@ -37,7 +37,7 @@ Only cover basic requirements, which are:
 Other things to note:
 - Program will loop until user manually exit
 - Currently there is no different employee status, all considered as permanent employee
-- Admin don't support apply and approve leave
+- Admin doesn't support apply and approve leave
 
 **Others**
 

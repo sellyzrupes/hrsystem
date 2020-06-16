@@ -1,10 +1,9 @@
-import config_variables as cv
 from Load_Data import employee as el
 from Models import employee as e
-from HR_System import func_employee as fe
-from HR_System import func_leave as fl
-from HR_System import func_team as ft
-from HR_System import func_role as fr
+from Business_Logic import func_employee as fe
+from Business_Logic import func_leave as fl
+from Business_Logic import func_team as ft
+from Business_Logic import func_role as fr
 
 def main():
     #TODO: write the function to run the different options. Handle the case for various user_roles.
@@ -41,7 +40,7 @@ def main():
                         inputstatus = get_option_input()
                         if(inputstatus > 0):
                             fl.approve_leave(inputapprove, inputstatus)
-                    #Add Employee
+                    #4 = Add Employee
                     elif (menu_option == 4):
                         inputname = raw_input("Insert name: ")
                         inputemail = raw_input("Insert email: ")
@@ -62,10 +61,14 @@ def login_menu():
     print("Welcome to HR System!\nPress 1 to Login.\nPress 0 to Exit.")
     print("-----------------------------------------------------------\n")
 
-
 def menu(userdata):
-    print("\nWelcome " + userdata['name'] + "!")
-    if userdata['role_id'] == 1:
+    empdata = el.load_employee_data()
+    employees = e.Employee.parse_from_dictionary(empdata)
+    for employee in employees:
+        if (userdata.emp_id == employee.emp_id):
+            userdata = employee
+    print("\nWelcome " + userdata.name + "!")
+    if userdata.role_id == 1:
         #1 = employee
         print("-----------------------------------------------------------")
         print("Please kindly choose which option by typing the number.")
@@ -73,7 +76,7 @@ def menu(userdata):
         print("2. Apply Leave")
         print("0. Logout")
         print("-----------------------------------------------------------\n")
-    elif userdata['role_id'] == 2:
+    elif userdata.role_id == 2:
         #2 = manager
         print("-----------------------------------------------------------")
         print("Please kindly choose which option by typing the number.")
@@ -82,7 +85,7 @@ def menu(userdata):
         print("3. Approve Leave")
         print("0. Logout")
         print("-----------------------------------------------------------\n")
-    elif userdata['role_id'] == 3:
+    elif userdata.role_id == 3:
         #3 = admin
         print("-----------------------------------------------------------")
         print("Please kindly choose which option by typing the number.")
@@ -95,28 +98,25 @@ def menu(userdata):
 
 def get_option_input():
     opt = raw_input("Input option: ")
-    #to check if user input string
+    #to check if user input is number or not
     if opt.isdigit():
         return int(opt)
     else:
-        return 10
-    
+        return 10 
 
 def login(user,passwd):
-    dataemp = el.load_employee_data()
-    #data = e.Employee(dataemp['emp_id'],)
-    for val in dataemp['employees']:
-        if val['email'] == user:
-            if str(val['password']) == passwd:
+    empdata = el.load_employee_data()
+    employees = e.Employee.parse_from_dictionary(empdata)
+    for employee in employees:
+        if employee.email == user:
+            if str(employee.password) == passwd:
                 print("Login Success!")
-                return val
+                return employee
             else:
                 return False
 
 def logout():
     print("Logout success!")
-
-
 
 if __name__ == "__main__":
     main()
