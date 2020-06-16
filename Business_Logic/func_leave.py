@@ -73,13 +73,8 @@ def update_balance(emp_id,balance):
     temp = []
     for employee in employees:
         if employee.emp_id == int(emp_id):
-            print("masuk")
-            print(employee.leave)
             employee.leave = employee.leave - balance
-            print(employee.leave)
         temp.append(employee.get_employees_dict())
-        print(temp)
-    
     writedata = {
         "employees": temp
     }
@@ -96,12 +91,12 @@ def apply_leave(start_date,end_date,userdata):
     #check peak period
     if pperiod > 0:
         print("Cannot take leave during peak period!")
-        #return None
+        return None
     if(userdata.role_id!=2):
         pcheck = check_other_member_leave(listleave,userdata)
         if pcheck == True:
             print("Cannot take leave, overlapped with other members!")
-            #return None
+            return None
     #to check if leave applied intersect with holiday
     deduct = compare_list_date(listleave,holidays)
     ctr = 0

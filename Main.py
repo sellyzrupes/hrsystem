@@ -50,6 +50,8 @@ def main():
                         ft.print_all_team_name()
                         inputteam = raw_input("Insert team id: ")
                         fe.add_emp(inputname, inputemail, inputpass, inputrole, inputteam)
+                    else:
+                        print("Invalid input!")
             else:
                 print("Wrong input, please try again")
         else:
