@@ -1,4 +1,5 @@
 import json
+import config_variables as cv
 from Load_Data import employee as el
 from Business_Logic import func_role as fr
 from Business_Logic import func_team as ft
@@ -57,9 +58,6 @@ def add_emp(inputname, inputemail, inputpass, inputrole,inputteam):
     print("Added Successfully!")
 
 def check_employee_status(status):
-    if status == 0:
-        return "Probation"
-    elif status == 1:
-        return "Permanent"
-    elif status ==2:
-        return "Resigned"
+    for key in cv.EMPLOYEE_STATUS.keys():
+        if cv.EMPLOYEE_STATUS[key] == status:
+            return key
