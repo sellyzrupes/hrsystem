@@ -15,4 +15,3 @@ def get_user_name():
                       "white-spaces in between.")
         else:
             print("Please do not leave blank.")
-

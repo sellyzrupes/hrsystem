@@ -19,3 +19,16 @@ class Employee:
                     "status_id": self.status_id,
                     "leave": self.leave}
         return emp_dict
+    
+    @staticmethod
+    def parse_from_dictionary(input):
+        employees = input['employees']
+        result = []
+        for employee in employees:
+            parsed = Employee(employee['emp_id'],employee['name'],employee['email'],employee['password'], employee['role_id'],employee['team_id'],employee['status_id'],employee['leave'])
+            result.append(parsed)
+        return result
+
+    
+
+    
