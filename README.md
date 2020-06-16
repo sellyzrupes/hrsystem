@@ -22,17 +22,15 @@ Only cover basic requirements, which are:
         - Only can apply from current date until end of 2020
         - Leave cannot be applied during peak period (7.7, 8.8, 9.9, 10.10, 11.11, 12.12)
         - Everybody in team cannot be on leave together (exclude manager)
-        - Not enough leave balance
     - Special rule for manager, manager can take leave anytime except peak period (cos he is the BOSS)
-    - Weekend won't be counted as leave (not yet added)
+    - Weekend won't be counted as leave
     - Leave taken on Public Holidays won't be counted (31-July, 10-Aug, 16-Nov, 25-Dec)
     - Balance will be deducted immediately after apply leave
-    - User cannot apply 2 leaves at the same time, need to wait for first leave to be approved
 4. Approve Leave
     - Manager can approve or reject staff leave
     - System will only show pending leave to manager
     - If manager rejects, balance need to be returned
-    - For now no need Admin approval if manager takes leave, later if have time need to add Admin Approval
+    - Manager can automatically take leave without approval
 
 Other things to note:
 - Program will loop until user manually exit
