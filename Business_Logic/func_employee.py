@@ -45,19 +45,16 @@ def add_emp(inputname, inputemail, inputpass, inputrole,inputteam):
     newid = int(employees[l].emp_id)+1
     #for now, all newly added employee will have status 1 and leave 14
     newdata = e.Employee(newid, inputname, inputemail, inputpass, int(inputrole), int(inputteam), 1, 14)
-    # {
-    #     "emp_id": empid,
-    #     "name": inputname,
-    #     "email": inputemail,
-    #     "password": inputpass,
-    #     "role_id": int(inputrole),
-    #     "team_id": int(inputteam),
-    #     "status_id": 1,
-    #     "leave": 14
-    # } 
     employees.append(newdata)
+    #change model to dict
+    temp = []
+    for employee in employees:
+        temp.append(employee.get_employees_dict())
+    writedata = {
+        "employees": temp
+    }
     with open('Database/employee.json','w') as emp_file:
-        json.dump(employees, emp_file, indent=4)
+        json.dump(writedata, emp_file, indent=4)
     print("Added Successfully!")
 
 def check_employee_status(status):

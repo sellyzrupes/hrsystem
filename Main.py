@@ -1,4 +1,3 @@
-import config_variables as cv
 from Load_Data import employee as el
 from Models import employee as e
 from Business_Logic import func_employee as fe
@@ -17,9 +16,6 @@ def main():
             user = raw_input("Input username/email: ")
             passwd = raw_input("Input password: ")
             userdata = login(user,passwd)
-            #userdata to support Employee Class
-            #userdata = e.Employee(employee['emp_id'],employee['name'],employee['email'],employee['password'], employee['role_id'],employee['team_id'],employee['status_id'],employee['leave'])
-            #print(userdata)
             if bool(userdata) == True:
                 menu_option = True
                 while menu_option > 0:
@@ -66,6 +62,11 @@ def login_menu():
     print("-----------------------------------------------------------\n")
 
 def menu(userdata):
+    empdata = el.load_employee_data()
+    employees = e.Employee.parse_from_dictionary(empdata)
+    for employee in employees:
+        if (userdata.emp_id == employee.emp_id):
+            userdata = employee
     print("\nWelcome " + userdata.name + "!")
     if userdata.role_id == 1:
         #1 = employee
