@@ -34,12 +34,13 @@ def main():
                         fl.apply_leave(start_date,end_date,userdata)
                     #3 = Approve Leave
                     elif (menu_option == 3):
-                        fl.view_pending_leave(userdata)
-                        inputapprove  = raw_input("Choose employee ID: ")
-                        print("1. Approve\n2. Reject\n0.Cancel")
-                        inputstatus = get_option_input()
-                        if(inputstatus > 0):
-                            fl.approve_leave(inputapprove, inputstatus)
+                        pending_approval = fl.view_pending_leave(userdata)
+                        if(pending_approval > 0):
+                            inputapprove  = raw_input("Choose employee ID: ")
+                            print("1. Approve\n2. Reject\n0.Cancel")
+                            inputstatus = get_option_input()
+                            if(inputstatus > 0):
+                                fl.approve_leave(inputapprove, inputstatus)
                     #4 = Add Employee
                     elif (menu_option == 4):
                         inputname = raw_input("Insert name: ")

@@ -148,12 +148,15 @@ def view_pending_leave(userdata):
                 counter +=1
     if(counter == 0):
         print ("No leave to be approved")
+    return counter
 
 def approve_leave(emp_id, stat):
     temp = []
+    for_reject = -1
     for leave in leaves:
         if leave.emp_id == int(emp_id):
             leave.leave_status = stat
+            for_reject = for_reject * leave.leave_balance
         temp.append(leave.get_leave_dict())
     writedata = {
         "leaves": temp,
@@ -164,6 +167,6 @@ def approve_leave(emp_id, stat):
         json.dump(writedata, emp_file, indent=4)
     if stat == 2:
         print("Leave Rejected! Leave Balance will be returned to the owner")
-        #add deduct balance
+        update_balance(emp_id,for_reject)
     elif stat == 1:
         print("Leave Approved!")
