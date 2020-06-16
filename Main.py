@@ -55,7 +55,7 @@ def main():
                         print("Invalid input!")
             else:
                 print("Wrong input, please try again")
-        else:
+        elif (login_option == 10):
             print("Wrong input, please try again")
     print("The program will quit now.")
 
