@@ -11,7 +11,7 @@ Only cover basic requirements, which are:
 2. Add Employee
     - Before admin input team_id and role_id, system will print out all available team_id and role_id
 3. View Employee
-    - Data already formatted properly
+    - Data already formatted properly, includes using config variable that has been provided
     - Based on role, validation already added from menu that available to display for spesific roles
         - Staff : can only view self data
         - Manager : can view team data including self data
@@ -19,7 +19,6 @@ Only cover basic requirements, which are:
 4. Apply Leave
     - Default value for all employees: 14 days leave balance
     - System can automatically rejects if user don't follow these rules:
-        - Only can apply from current date until end of 2020
         - Leave cannot be applied during peak period (7.7, 8.8, 9.9, 10.10, 11.11, 12.12)
         - Everybody in team cannot be on leave together (exclude manager)
     - Special rule for manager, manager can take leave anytime except peak period (cos he is the BOSS)
@@ -32,11 +31,9 @@ Only cover basic requirements, which are:
     - If manager rejects, balance need to be returned
     - Manager can automatically take leave without approval
 
-Other things to note:
+**Others**
+
+- Run the program from the Main.py
 - Program will loop until user manually exit
 - Currently there is no different employee status, all considered as permanent employee
 - Admin doesn't support apply and approve leave
-
-**Others**
-
-Run the program from the Main.py
