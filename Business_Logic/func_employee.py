@@ -1,7 +1,7 @@
 import json
 from Load_Data import employee as el
-from HR_System import func_role as fr
-from HR_System import func_team as ft
+from Business_Logic import func_role as fr
+from Business_Logic import func_team as ft
 from Models import employee as e
 
 empdata = el.load_employee_data()
