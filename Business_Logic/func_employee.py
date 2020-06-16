@@ -28,8 +28,10 @@ def print_data_emp(userdata):
     print("Name : " + userdata.name)
     print("E-mail : " + userdata.email)
     print("Password : " + userdata.password)
+    #to get role name from role id
     rolename = fr.get_role_name(userdata.role_id)
     print("Role : " + rolename)
+    #to get team name from team id
     teamname = ft.get_team_name(userdata.team_id)
     print("Team : " + teamname)
     status = check_employee_status(userdata.status_id)
@@ -41,6 +43,7 @@ def print_data_emp(userdata):
 def add_emp(inputname, inputemail, inputpass, inputrole,inputteam):
     l = len(employees)-1
     newid = int(employees[l].emp_id)+1
+    #for now, all newly added employee will have status 1 and leave 14
     newdata = e.Employee(newid, inputname, inputemail, inputpass, int(inputrole), int(inputteam), 1, 14)
     # {
     #     "emp_id": empid,
