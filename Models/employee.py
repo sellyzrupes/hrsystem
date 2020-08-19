@@ -28,7 +28,11 @@ class Employee:
             parsed = Employee(employee['emp_id'],employee['name'],employee['email'],employee['password'], employee['role_id'],employee['team_id'],employee['status_id'],employee['leave'])
             result.append(parsed)
         return result
-
+        
+    @staticmethod
+    def dict_to_object(employee):
+        data = Employee(employee['emp_id'],employee['name'],employee['email'],employee['password'], employee['role_id'],employee['team_id'],employee['status_id'],employee['leave'])
+        return data
     
 
     
