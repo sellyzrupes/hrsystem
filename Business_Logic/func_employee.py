@@ -11,16 +11,23 @@ employees = e.Employee.parse_from_dictionary(empdata)
 def view_emp(userdata):
     if userdata.role_id == 1:
         #1 = employee
-        print_data_emp(userdata)
+        writedata = {
+            "employees": e.Employee.get_employees_dict(userdata)
+        }
+        return writedata
     elif userdata.role_id == 2:
         #2 = manager
+        temp = []
         for employee in employees:
             if employee.team_id == userdata.team_id:
-                print_data_emp(employee)
+                temp.append(employee.get_employees_dict())
+        writedata = {
+            "employees": temp
+        }
+        return json.dumps(writedata)
     elif userdata.role_id == 3:
         #3 = admin
-        for employee in employees:
-            print_data_emp(employee)
+        return empdata
 
 def print_data_emp(userdata):
     print("\n-----------------------------------------------------------")
@@ -38,24 +45,6 @@ def print_data_emp(userdata):
     print("Status : " + status)
     print("Leave Balance : " + str(userdata.leave))
     print("-----------------------------------------------------------\n")
-
-
-def add_emp(inputname, inputemail, inputpass, inputrole,inputteam):
-    l = len(employees)-1
-    newid = int(employees[l].emp_id)+1
-    #for now, all newly added employee will have status 1 and leave 14
-    newdata = e.Employee(newid, inputname, inputemail, inputpass, int(inputrole), int(inputteam), 1, 14)
-    employees.append(newdata)
-    #change model to dict
-    temp = []
-    for employee in employees:
-        temp.append(employee.get_employees_dict())
-    writedata = {
-        "employees": temp
-    }
-    with open('Database/employee.json','w') as emp_file:
-        json.dump(writedata, emp_file, indent=4)
-    print("Added Successfully!")
 
 def check_employee_status(status):
     for key in cv.EMPLOYEE_STATUS.keys():
